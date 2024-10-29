@@ -4,9 +4,6 @@
 
 using namespace std;
 
-ALU::ALU() : registers(16) {}
-
-
 float ALU::binToFloat(string bin) {
 
     int sign = bin[0] - '0', bias = 4;
@@ -90,5 +87,5 @@ void ALU::add(int r1, int r2, int r3) {
 
     string bin = floatToBin(ans);
     string hex = binToHex(bin);
-    registers[r3] = hex;
+    //registers[r3] = hex;
 }
