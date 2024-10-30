@@ -4,14 +4,12 @@
 
 using namespace std;
 
-// Definitions of CU methods
-
-void CU::load(int idxReg, int intMem, vector<Register>& reg, const Memory& mem) {
-    reg[idxReg].setData(mem.getData(intMem));
+void CU::load(int idxReg, int intMem, Register reg, const Memory& mem) {
+    reg.setData(idxReg,mem.getData(intMem));
 }
 
-void CU::load(int idxReg, string val, vector<Register>& reg) {
-    reg[idxReg].setData(val);
+void CU::load(int idxReg, string val, Register reg) {
+    reg.setData(idxReg,val);
 }
 
 void CU::store(string reg, string& mem) {
@@ -22,9 +20,9 @@ void CU::mov(int reg1idx, int reg2idx, vector<Register>& reg) {
     reg[reg1idx] = reg[reg2idx];
 }
 
-void CU::jump(int regIdx, int memIdx, vector<Register>& reg, string& pc, const Memory& memory) {
-    if (reg[regIdx].getData() != 0) {
-        pc = memory.getData(memIdx);
+void CU::jump(int regIdx, int memIdx, Register& reg, string& pc, const Memory& memory) {
+    if (reg.getData(regIdx) == reg.getData(0)) {
+        pc = memIdx;
     }
 }
 
