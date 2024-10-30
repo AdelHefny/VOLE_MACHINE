@@ -4,11 +4,7 @@
 
 using namespace std;
 
-ALU::ALU() : registers(16) {}
-
-
 float ALU::binToFloat(string bin) {
-
     int sign = bin[0] - '0', bias = 4;
     int exponent = bitset<3>(bin.substr(1, 3)).to_ulong();
     int mantissa = bitset<4>(bin.substr(4, 4)).to_ulong();
@@ -90,5 +86,4 @@ void ALU::add(int r1, int r2, int r3) {
 
     string bin = floatToBin(ans);
     string hex = binToHex(bin);
-    registers[r3] = hex;
 }

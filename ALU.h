@@ -8,7 +8,6 @@ using namespace std;
 class ALU {
 public:
     ALU();
-    vector<string> registers;
     string binToHex(string s);
     string decToBin(int dec);
     string floatToBin(float f);
