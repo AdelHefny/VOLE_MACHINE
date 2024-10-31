@@ -12,12 +12,11 @@ private:
     ALU alu;
     CU cu;
 public:
-    CPU(Register* reg, ALU* alu, CU* cu)
-            : pc(0), ir(""), Reg(reg), alu(alu), cu(cu) {}
-    void runNextStep(memory& mem);
-    void fetch(memory& mem);
+    CPU(): pc(0), ir(""), Reg(16) {}
+    void runNextStep(Memory& mem);
+    void fetch(Memory& mem);
     vector<int> decode();
-    void execute(Register &reg,memory& mem,vector<int> instrction);
+    void execute(Register &reg,Memory& mem,vector<int> instrction);
 };
 
 

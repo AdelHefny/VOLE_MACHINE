@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std;
 
-Register::Register(int sz) : size(sz), storage(size, 0) {}
-
 void Register::set_value(int address, const int& value) {
     if (address < 0 || address >= size) {
         cout << "inaccessible address" << endl;

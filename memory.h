@@ -5,15 +5,15 @@
 #include <string>
 using namespace std;
 
-class memory {
+class Memory {
 private:
-    vector<string> storage;
+    vector<int> storage;
     int size = 256;
 
 public:
-    memory(int sz);
-    void set_value(int address, const string& value);
-    string get_value(int address);
+    Memory(int sz): size(sz),storage(sz){};
+    void set_value(int address, const int& value);
+    int get_value(int address);
     void clear();
 };
 

@@ -73,9 +73,9 @@ string ALU::binToHex(string s) {
     return hex;
 }
 
-void ALU::add(int r1, int r2, int r3) {
-    string bin1 = decToBin(hexToDec(registers[r1]));
-    string bin2 = decToBin(hexToDec(registers[r2]));
+void ALU::add(int r1, int r2, int r3,Register& registers) {
+    string bin1 = decToBin(registers.get_value(r1));
+    string bin2 = decToBin(registers.get_value(r2));
 
     float f1 = binToFloat(bin1), f2 = binToFloat(bin2);
 
