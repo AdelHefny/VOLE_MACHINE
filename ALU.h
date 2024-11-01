@@ -1,21 +1,21 @@
-#ifndef ALU_h
-#define ALU_h
-#include <bits/stdc++.h>
-#include <bitset>
+#ifndef ALU_H
+#define ALU_H
+
+#include <string>
+#include "Register.h"
 
 using namespace std;
 
 class ALU {
 public:
     ALU();
-    vector<string> registers;       // OK
     string binToHex(string s);      // OK
-    string floatToBin(float f);     //
+    string floatToBin(float f);     // OK
     float hexToFloat(string s);     // OK
     int hexToDec(string s);         // OK
     string decToHex(int dec);       // OK
-    string twosComp(int r1, int r2, int r3);
-    string add(int r1, int r2, int r3);   ////////FUCK/////////
+    void twosComp(int idx_r1, int idx_r2, int idx_r3, Register& reg);
+    void add(int idx_r1, int idx_r2, int idx_r3, Register& reg);
 };
 
-#endif //ALU_h
+#endif // ALU_H
