@@ -40,7 +40,7 @@ string ALU::floatToBin(float f) {
 
     string fracBin = "", intBin = "", Bin = "";
     string mantissa = "";
-    while(frac > 0 && fracBin.size() < 8){
+    while(frac > 0.0 && fracBin.size() < 8){
         frac *= 2;
         if(frac >= 1.0){
             fracBin += "1";
@@ -62,21 +62,18 @@ string ALU::floatToBin(float f) {
     int ex = 0;
     auto it = find(Bin.begin(), Bin.end(), '.');
     if (f > 1.0) {
-        ex = it - Bin.begin();
-        mantissa += Bin.substr(0, ex);
-        mantissa += Bin.substr(ex + 1, 4 - ex);
+        ex = it - Bin.begin(), mantissa += Bin.substr(0, ex), mantissa += Bin.substr(ex + 1, 4 - ex);
     }
     else {
-        int val = it - Bin.begin();
-        int indx = 0;
-        for (int i = val + 1; i < Bin.size(); ++i) {
+        int x = it - Bin.begin(), indx = 0;
+        for (int i = x+1; i < Bin.size(); i++) {
             if (Bin[i] == '1') {
                 indx = i;
                 break;
             }
             --ex;
             if (ex == -4) {
-                indx = i + 1;
+                indx = i+1;
                 break;
             }
 
@@ -85,7 +82,7 @@ string ALU::floatToBin(float f) {
     }
 
     while(mantissa.size() < 4){
-        mantissa.insert(0,"0");
+        mantissa += "0";
     }
 
     int biasedexp = ex + 4;
