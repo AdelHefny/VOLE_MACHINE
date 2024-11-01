@@ -1,39 +1,80 @@
 #include "CPU.h"
+#include <cmath>
+#include <cctype>
 
-void CPU::fetch(memory &mem) {
+using namespace std;
+
+void CPU::fetch() {
     ir = mem.getCell(pc);
-    ir += mem.getCell(pc+1);
+    ir += mem.getCell(pc + 1);
 }
 
-int hexToInt(string hex){
-    int num = 0;
-    int p = hex.size() - 1;
-    for (char c:hex) {
-        if(c >= '0' && c <= '9'){
-            num += (c - '0')*pow(16,p);
-        }else{
-            num += (tolower(c) - 'a' + 10)*pow(16,p);
-        }
-        p--;
+int hexToInt(char hex) {
+    if (hex >= '0' && hex <= '9') {
+        return hex - '0';
+    } else {
+        return tolower(hex) - 'a' + 10;
     }
-    return num;
 }
 
 vector<int> CPU::decode() {
     vector<int> decoded;
-    if(ir[0] >= '0' && ir[0] <= '9'){
-        decoded.push_back(ir[0] - '0');
-    }else{
-        decoded.push_back(tolower(ir[0]) - 'a' + 10);
+    for (int i = 0; i < ir.size(); ++i) {
+        decoded.push_back(hexToInt(ir[i]));
     }
-    decoded.push_back(hexToInt(to_string(ir[1])));
-    decoded.push_back(hexToInt(to_string(ir[2])));
-    decoded.push_back(hexToInt(to_string(ir[3])));
     return decoded;
 }
 
-void CPU::runNextStep(memory &mem) {
-    pc += 2;
-    fetch(mem);
-    execute(Reg,mem,decode());
+void CPU::runNextStep() {
+    while (true) {
+        fetch();
+        pc += 2;
+        vector<int> decoded_instructions = decode();
+        execute(decoded_instructions);
+        if (cu.get_flag()) {
+            break;
+        }
+    }
+}
+
+void CPU::execute(const vector<int>& decoded) {
+    int opcode = decoded[0];
+    int r = decoded[1], x = decoded[2], y = decoded[3];
+    int address = x * 16 + y;
+    string hex_char = "0123456789ABCDEF";
+    string val = "";
+
+    val += hex_char[x];
+    val += hex_char[y];
+
+    switch (opcode) {
+        case 1:
+            cu.load(r, address, reg, mem);
+            break;
+        case 2:
+            cu.load(r, val, reg);
+            break;
+        case 3: {
+            cu.store(r, address, reg, mem);
+            if (x == 0 && y == 0) {
+                cout << mem.get_value(address) << '\n';
+            }
+            break;
+        }
+        case 4:
+            cu.mov(y, x, reg);
+            break;
+        case 5:
+            alu.add(r, x, y, reg);
+            break;
+        case 6:
+            alu.addFloat(r, x, y, reg);
+            break;
+        case 11:
+            cu.jump(r, address, reg, pc);
+            break;
+        case 12:
+            cu.halt();
+            break;
+    }
 }
