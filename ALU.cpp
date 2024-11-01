@@ -1,9 +1,6 @@
 #include "ALU.h"
 #include "Register.h"
-#include <bitset>
-#include <cmath>
-#include <sstream>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
 

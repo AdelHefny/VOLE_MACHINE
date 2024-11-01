@@ -1,7 +1,7 @@
 #ifndef ALU_H
 #define ALU_H
 
-#include <string>
+#include <bits/stdc++.h>
 #include "Register.h"
 
 using namespace std;
