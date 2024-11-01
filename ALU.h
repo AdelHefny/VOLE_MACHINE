@@ -2,19 +2,20 @@
 #define ALU_h
 #include <bits/stdc++.h>
 #include <bitset>
-#include "register.h"
+
 using namespace std;
 
 class ALU {
 public:
-    ALU() {};
-    string binToHex(string s);
-    string decToBin(int dec);
-    string floatToBin(float f);
-    float binToFloat(string s);
-    int hexToDec(string s);
-    string decToHex(int dec);
-   void add(int r1, int r2, int r3,Register& registers);
+    ALU();
+    vector<string> registers;       // OK
+    string binToHex(string s);      // OK
+    string floatToBin(float f);     //
+    float hexToFloat(string s);     // OK
+    int hexToDec(string s);         // OK
+    string decToHex(int dec);       // OK
+    string twosComp(int r1, int r2, int r3);
+    string add(int r1, int r2, int r3);   ////////FUCK/////////
 };
 
 #endif //ALU_h
