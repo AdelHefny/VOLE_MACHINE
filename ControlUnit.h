@@ -17,6 +17,7 @@ public:
     void store(int idxReg, int memIdx, Register& reg, Memory& mem);
     void mov(int reg1Idx, int reg2Idx, Register& reg);
     void jump(int regIdx, int memIdx, Register& reg, int& pc);
+    bool get_flag() ;
     void halt();
 };
 

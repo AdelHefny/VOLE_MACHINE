@@ -30,7 +30,9 @@ void CU::jump(int regIdx, int memIdx, Register& reg, int& pc) {
         pc = memIdx;
     }
 }
-
+bool CU::get_flag(){
+    return haltFlag ;
+}
 void CU::halt() {
     haltFlag = true;
 }
