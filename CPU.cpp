@@ -25,7 +25,7 @@ vector<int> CPU::decode() {
     return decoded;
 }
 
-void CPU::runNextStep() {
+void CPU::run() {
     while (true) {
         fetch();
         pc += 2;

@@ -21,7 +21,7 @@ private:
     CU cu;
 public:
     CPU() : pc(0), ir(""), reg(16), mem(256) {}
-    void runNextStep();
+    void run();
     void fetch();
     vector<int> decode();
     void execute(const vector<int>& decoded);
