@@ -1,27 +1,28 @@
 #include "Memory.h"
 #include <iostream>
+
 using namespace std;
 
-Memory::Memory(int sz) : memory_size(sz), memory_data(sz, "00") {}
+Memory::Memory() : memory_data(MEMORY_SIZE, "00") {}
 
-void Memory::set_value(int address, const string& value) {
-    if (address < 0 || address >= memory_size) {
+void Memory::set_value(int address, const std::string& value) {
+    if (address < 0 || address >= MEMORY_SIZE) {
         cout << "Inaccessible address" << endl;
     } else {
         memory_data[address] = value;
     }
 }
 
-string Memory::get_value(int address) {
-    if (address < 0 || address >= memory_size) {
+std::string Memory::get_value(int address) {
+    if (address < 0 || address >= MEMORY_SIZE) {
         return "Inaccessible address";
     } else {
         return memory_data[address];
     }
 }
 
-void Memory::clear() {
-    for (int i = 0; i < memory_size; i++) {
+void Memory::reset() {
+    for (int i = 0; i < MEMORY_SIZE; i++) {
         memory_data[i] = "00";
     }
 }
