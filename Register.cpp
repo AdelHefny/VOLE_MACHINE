@@ -5,7 +5,7 @@ using namespace std;
 
 Register::Register() : register_data(REGISTER_SIZE, "00") {}
 
-void Register::set_value(int address, const std::string& value) {
+void Register::set_value(int address, const string& value) {
     if (address < 0 || address >= REGISTER_SIZE) {
         cout << "Inaccessible address" << endl;
     } else {
@@ -13,7 +13,7 @@ void Register::set_value(int address, const std::string& value) {
     }
 }
 
-std::string Register::get_value(int address) {
+string Register::get_value(int address) {
     if (address < 0 || address >= REGISTER_SIZE) {
         return "Inaccessible address";
     } else {
