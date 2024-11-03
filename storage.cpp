@@ -1,8 +1,10 @@
-#include "register.h"
+#include "storage.h"
 #include <iostream>
 using namespace std;
 
-void Register::set_value(int address, const int& value) {
+Stoarage::Stoarage(int sz) : size(sz), storage(size, "00") {}
+
+void Stoarage::set_value(int address, const string& value) {
     if (address < 0 || address >= size) {
         cout << "inaccessible address" << endl;
     } else {
@@ -10,16 +12,16 @@ void Register::set_value(int address, const int& value) {
     }
 }
 
-int Register::get_value(int address) {
+string Stoarage::get_value(int address) {
     if (address < 0 || address >= size) {
-        throw "inaccessible address";
+        return "inaccessible address";
     } else {
         return storage[address];
     }
 }
 
-void Register::clear() {
+void Stoarage::clear() {
     for (int i = 0; i < size; i++) {
-        storage[i] = 0;
+        storage[i] = "00";
     }
 }

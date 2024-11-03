@@ -1,6 +1,4 @@
 #include "ControlUnit.h"
-#include "Register.h"
-#include "Memory.h"
 #include <string>
 #include <iostream>
 

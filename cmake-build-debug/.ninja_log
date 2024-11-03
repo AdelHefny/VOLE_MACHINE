@@ -1,0 +1,18 @@
+# ninja log v6
+8	6108	7522154811788476	CMakeFiles/untitled.dir/main.cpp.obj	99cb4ae5817e39d8
+8	608	7522159393927506	build.ninja	8a6b1d0097cbbb52
+2691	3215	7522150862818531	untitled.exe	60e4b016ec144429
+23	2276	7522154811938494	CMakeFiles/untitled.dir/Memory.cpp.obj	4865ab6605affb7a
+96	2294	7522154812670661	CMakeFiles/untitled.dir/Register.cpp.obj	a10c18c4d5aefede
+183	6079	7522154813542198	CMakeFiles/untitled.dir/machine.cpp.obj	f7b36562f91289b5
+60	6106	7522154812308517	CMakeFiles/untitled.dir/MainUi.cpp.obj	586ffea2aeab3a
+15	4388	7522155227215323	CMakeFiles/untitled.dir/CPU.cpp.obj	483aba31e30d7cb4
+255	1667	7522159490538706	CMakeFiles/untitled.dir/ControlUnit.cpp.obj	a56b225ecd51d18e
+48	6085	7522159488471312	CMakeFiles/untitled.dir/MainUi.cpp.obj	586ffea2aeab3a
+11	6143	7522159488094429	CMakeFiles/untitled.dir/main.cpp.obj	99cb4ae5817e39d8
+155	6561	7522159489536670	CMakeFiles/untitled.dir/machine.cpp.obj	f7b36562f91289b5
+99	6622	7522159488975423	CMakeFiles/untitled.dir/CPU.cpp.obj	483aba31e30d7cb4
+212	7326	7522159490107605	CMakeFiles/untitled.dir/ALU.cpp.obj	c444ac255a805698
+13	5827	7522161404492365	CMakeFiles/untitled.dir/main.cpp.obj	99cb4ae5817e39d8
+41	5835	7522161404782352	CMakeFiles/untitled.dir/MainUi.cpp.obj	586ffea2aeab3a
+5836	6213	7522161462728195	untitled.exe	3815445827cb4754

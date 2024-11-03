@@ -5,8 +5,8 @@
 using namespace std;
 
 void CPU::fetch() {
-    ir = mem.getCell(pc);
-    ir += mem.getCell(pc + 1);
+    ir = mem.get_value(pc);
+    ir += mem.get_value(pc + 1);
 }
 
 int hexToInt(char hex) {
@@ -68,7 +68,7 @@ void CPU::execute(const vector<int>& decoded) {
             alu.add(r, x, y, reg);
             break;
         case 6:
-            alu.addFloat(r, x, y, reg);
+            alu.add(r, x, y, reg);
             break;
         case 11:
             cu.jump(r, address, reg, pc);

@@ -1,8 +1,6 @@
 #ifndef VOLE_MACHINE_CPU_H
 #define VOLE_MACHINE_CPU_H
 
-#include "Memory.h"
-#include "Register.h"
 #include "ALU.h"
 #include "ControlUnit.h"
 #include <iostream>
