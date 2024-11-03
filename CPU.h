@@ -16,15 +16,16 @@ private:
     int pc;
     string ir;
     Register reg;
-    Memory mem;
     ALU alu;
     CU cu;
 public:
-    CPU() : pc(0), ir(""), reg(16), mem(256) {}
-    void run();
-    void fetch();
+    CPU() : pc(0), ir(""){}
+    void run(Memory& mem);
+    void fetch(Memory& mem);
     vector<int> decode();
     void execute(const vector<int>& decoded);
+    bool CPU::IsValid(const string& instruction) ;
+    void reset() ;
 };
 
 #endif

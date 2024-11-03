@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void CPU::fetch() {
+void CPU::fetch(Memory& mem) {
     ir = mem.getCell(pc);
     ir += mem.getCell(pc + 1);
 }
@@ -24,19 +24,32 @@ vector<int> CPU::decode() {
     }
     return decoded;
 }
-
-void CPU::run() {
-    while (true) {
-        fetch();
-        pc += 2;
-        vector<int> decoded_instructions = decode();
-        execute(decoded_instructions);
-        if (cu.get_flag()) {
-            break;
+bool CPU::IsValid(const string& instruction){
+    string hex_char = "0123456789ABCDEF" ;
+    if(s.size() != 4){
+        return false ;
+    }
+    for(char c : s){
+        if(hex_char.find(c) == string::npos){
+            return false ;
         }
     }
+    return true ;
 }
-
+void CPU::runNextInstruction(Memory& mem) {
+    fetch(Memory& mem);
+    pc += 2;
+    if(IsValid(ir)){
+    vector<int> decoded_instructions = decode();
+    execute(decoded_instructions);
+    }
+}
+void CPU::reset(){
+    pc = 0 ;
+    ir = "" ;
+    reg.reset();
+    cu.reset();
+}
 void CPU::execute(const vector<int>& decoded) {
     int opcode = decoded[0];
     int r = decoded[1], x = decoded[2], y = decoded[3];
@@ -65,10 +78,10 @@ void CPU::execute(const vector<int>& decoded) {
             cu.mov(y, x, reg);
             break;
         case 5:
-            alu.add(r, x, y, reg);
+            alu.twosComp(r, x, y, reg);
             break;
         case 6:
-            alu.addFloat(r, x, y, reg);
+            alu.add(r, x, y, reg);
             break;
         case 11:
             cu.jump(r, address, reg, pc);
