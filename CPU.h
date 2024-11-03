@@ -15,15 +15,15 @@ class CPU {
 private:
     int pc;
     string ir;
-    Register reg;
-    ALU alu;
-    CU cu;
 public:
+    Register reg;
+    CU cu;
+    ALU alu;
     CPU() : pc(16), ir("") {}
     void runNextInstruction(Memory& mem);
     void fetch(Memory& mem);
     vector<int> decode();
-    void execute(const vector<int>& decoded);
+    void execute(const vector<int>& decoded,Memory& mem);
     bool IsValid(const string& instruction);
     void reset();
     void set_pc(int initialValue);

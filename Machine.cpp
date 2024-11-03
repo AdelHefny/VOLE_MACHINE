@@ -6,7 +6,7 @@
 
 Machine::Machine(){}
 
-void Machine::loadProgramFile(const string& filename,int address = 16) {
+void Machine::loadProgramFile(const string& filename,int address) {
 
     if(address != 16){
         cpu.set_pc(address);
@@ -14,7 +14,7 @@ void Machine::loadProgramFile(const string& filename,int address = 16) {
 
     ifstream file(filename);
     string instruct;
-    while (getline(file, instruct) && address <=255)) {
+    while (getline(file, instruct) && address <=255) {
             if(instruct.size()<2){
                 continue ;
             }

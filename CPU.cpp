@@ -12,8 +12,8 @@ int hexToInt(char hex) {
 }
 
 void CPU::fetch(Memory& mem) {
-    ir = mem.getCell(pc);
-    ir += mem.getCell(pc + 1);
+    ir = mem.get_value(pc);
+    ir += mem.get_value(pc + 1);
 }
 
 vector<int> CPU::decode() {
@@ -42,7 +42,7 @@ void CPU::runNextInstruction(Memory& mem) {
     pc += 2;
     if (IsValid(ir)) {
         vector<int> decoded_instructions = decode();
-        execute(decoded_instructions);
+        execute(decoded_instructions,mem);
     }
 }
 
@@ -53,7 +53,7 @@ void CPU::reset() {
     cu.reset();
 }
 
-void CPU::execute(const vector<int>& decoded) {
+void CPU::execute(const vector<int>& decoded,Memory& mem) {
     int opcode = decoded[0];
     int r = decoded[1], x = decoded[2], y = decoded[3];
     int address = x * 16 + y;
@@ -80,11 +80,13 @@ void CPU::execute(const vector<int>& decoded) {
             cu.mov(y, x, reg);
             break;
         case 5:
-            alu.twosComp(r, x, y, reg);
+            alu.twosComp(x, y, r, reg);
             break;
         case 6:
-            alu.add(r, x, y, reg);
+            alu.add(x, y, r, reg);
             break;
+        case:
+
         case 11:
             cu.jump(r, address, reg, pc);
             break;
@@ -92,4 +94,8 @@ void CPU::execute(const vector<int>& decoded) {
             cu.halt();
             break;
     }
+}
+
+void CPU::set_pc(int initialValue){
+    this->pc = initialValue;
 }

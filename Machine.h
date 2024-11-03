@@ -14,7 +14,7 @@ private:
     Memory mem;
 public:
     Machine();
-    void loadProgramFile(const string& filename);
+    void loadProgramFile(const string& filename,int address = 16);
     void runProgram();
     void outputState() ;
     void reset();

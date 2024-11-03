@@ -9,7 +9,7 @@ bool MainUi::getFileOrInstruction() {
 
 string MainUi::inputFileName() {
     string fileName;
-    cout << "Enter the file name: ";
+    cout << "Enter the file name:";
     cin >> fileName;
 
     ifstream file(fileName);
@@ -45,8 +45,9 @@ string MainUi::inputInstruction() {
 }
 
 int MainUi::inputChoice() {
+    machine.reset();
     char choice;
-    cout << "Enter your choice (a, b, or c): ";
+    cout << "Enter your choice (a, b, or c):";
     cin >> choice;
     choice = tolower(choice);
 

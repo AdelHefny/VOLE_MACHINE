@@ -88,11 +88,17 @@ string ALU::floatToBin(float f) {
     int biasedexp = ex + 4;
     return to_string(sign) + bitset<3>(biasedexp).to_string() + mantissa;
 }
-
+string vlidateHexValidMem(string s){
+    if(s.size() < 2){
+        s.push_back('0');
+        reverse(s.begin(),s.end());
+    }
+    return s;
+}
 string ALU::decToHex(int dec) {
     stringstream ss;
-    ss << hex << uppercase << dec;
-    return ss.str();
+    ss << hex << uppercase << dec%256;
+    return vlidateHexValidMem(ss.str());
 }
 
 string ALU::binToHex(string bin) {
@@ -123,7 +129,6 @@ void ALU::twosComp(int idx_r1, int idx_r2, int idx_r3, Register& reg) {
     int ans = a + b;
 
     if (ans < 0) ans += 256;
-
     string res = decToHex(ans);
     reg.set_value(idx_r3, res);
 }

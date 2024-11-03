@@ -9,6 +9,8 @@ int main() {
         int choice = ui.inputChoice();
         if(choice == 0) {
             ui.machine.loadProgramFile(ui.inputFileName());
+            ui.machine.runProgram();
+            ui.machine.outputState();
         }else if(choice == 1){
             ui.enterFileOrInstruction = true;
             ui.inputInstruction();
