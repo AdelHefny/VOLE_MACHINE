@@ -20,7 +20,7 @@ private:
     CU cu;
 public:
     CPU() : pc(0), ir(""){}
-    void run(Memory& mem);
+    void runNextInstruction(Memory& mem);
     void fetch(Memory& mem);
     vector<int> decode();
     void execute(const vector<int>& decoded);
