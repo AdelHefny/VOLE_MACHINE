@@ -3,18 +3,17 @@
 
 #include <vector>
 #include <string>
-using namespace std;
-
+using namespace std ;
 class Memory {
 private:
+    static const int MEMORY_SIZE = 256;
     vector<string> memory_data;
-    int memory_size;
 
 public:
-    Memory(int sz);
+    Memory();
     void set_value(int address, const string& value);
     string get_value(int address);
-    void clear();
+    void reset();
 };
 
 #endif

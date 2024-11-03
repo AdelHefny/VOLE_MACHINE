@@ -28,8 +28,11 @@ void CU::jump(int regIdx, int memIdx, Register& reg, int& pc) {
         pc = memIdx;
     }
 }
-bool CU::get_flag(){
+bool CU::IsHalted(){
     return haltFlag ;
+}
+void CU::reset(){
+    haltFlag = false ;
 }
 void CU::halt() {
     haltFlag = true;

@@ -1,5 +1,4 @@
 #include "ALU.h"
-#include "Register.h"
 #include <bits/stdc++.h>
 
 using namespace std;
