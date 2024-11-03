@@ -1,6 +1,8 @@
-#ifndef VOLE_MACHINE_CPU_H
+    #ifndef VOLE_MACHINE_CPU_H
 #define VOLE_MACHINE_CPU_H
 
+#include "Memory.h"
+#include "Register.h"
 #include "ALU.h"
 #include "ControlUnit.h"
 #include <iostream>
@@ -17,13 +19,14 @@ private:
     ALU alu;
     CU cu;
 public:
-    CPU() : pc(0), ir(""){}
+    CPU() : pc(16), ir("") {}
     void runNextInstruction(Memory& mem);
     void fetch(Memory& mem);
     vector<int> decode();
     void execute(const vector<int>& decoded);
-    bool CPU::IsValid(const string& instruction) ;
-    void reset() ;
+    bool IsValid(const string& instruction);
+    void reset();
+    void set_pc(int initialValue);
 };
 
 #endif

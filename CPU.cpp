@@ -2,19 +2,18 @@
 #include <cmath>
 #include <cctype>
 
-using namespace std;
-
-void CPU::fetch(Memory& mem) {
-    ir = mem.getCell(pc);
-    ir += mem.getCell(pc + 1);
-}
-
+// Helper function to convert a hexadecimal character to an integer
 int hexToInt(char hex) {
     if (hex >= '0' && hex <= '9') {
         return hex - '0';
     } else {
         return tolower(hex) - 'a' + 10;
     }
+}
+
+void CPU::fetch(Memory& mem) {
+    ir = mem.getCell(pc);
+    ir += mem.getCell(pc + 1);
 }
 
 vector<int> CPU::decode() {
@@ -24,41 +23,45 @@ vector<int> CPU::decode() {
     }
     return decoded;
 }
-bool CPU::IsValid(const string& instruction){
-    string hex_char = "0123456789ABCDEF" ;
-    if(s.size() != 4){
-        return false ;
+
+bool CPU::IsValid(const string& instruction) {
+    string hex_chars = "0123456789ABCDEF";
+    if (instruction.size() != 4) {
+        return false;
     }
-    for(char c : s){
-        if(hex_char.find(c) == string::npos){
-            return false ;
+    for (char c : instruction) {
+        if (hex_chars.find(toupper(c)) == string::npos) {
+            return false;
         }
     }
-    return true ;
+    return true;
 }
+
 void CPU::runNextInstruction(Memory& mem) {
-    fetch(Memory& mem);
+    fetch(mem);
     pc += 2;
-    if(IsValid(ir)){
-    vector<int> decoded_instructions = decode();
-    execute(decoded_instructions);
+    if (IsValid(ir)) {
+        vector<int> decoded_instructions = decode();
+        execute(decoded_instructions);
     }
 }
-void CPU::reset(){
-    pc = 0 ;
-    ir = "" ;
+
+void CPU::reset() {
+    pc = 16;
+    ir = "";
     reg.reset();
     cu.reset();
 }
+
 void CPU::execute(const vector<int>& decoded) {
     int opcode = decoded[0];
     int r = decoded[1], x = decoded[2], y = decoded[3];
     int address = x * 16 + y;
-    string hex_char = "0123456789ABCDEF";
+    string hex_chars = "0123456789ABCDEF";
     string val = "";
 
-    val += hex_char[x];
-    val += hex_char[y];
+    val += hex_chars[x];
+    val += hex_chars[y];
 
     switch (opcode) {
         case 1:
@@ -67,13 +70,12 @@ void CPU::execute(const vector<int>& decoded) {
         case 2:
             cu.load(r, val, reg);
             break;
-        case 3: {
+        case 3:
             cu.store(r, address, reg, mem);
             if (x == 0 && y == 0) {
                 cout << mem.get_value(address) << '\n';
             }
             break;
-        }
         case 4:
             cu.mov(y, x, reg);
             break;

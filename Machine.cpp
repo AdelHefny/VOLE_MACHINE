@@ -6,37 +6,56 @@
 
 Machine::Machine(){}
 
-void Machine::loadProgramFile(const string& filename,int address = 10) {
-    ifstream file(filename);
-    string line;
+void Machine::loadProgramFile(const string& filename,int address = 16) {
 
-    while (getline(file, line)) {
-            mem.set_value(address++, line);
-            if(address > 255|| address <0){
-                break ;
-            }
+    if(address != 16){
+        cpu.set_pc(address);
     }
 
-    if(mem.get_value(address) != "C000" && address <= 255){
-        mem.set_value(address++, "C000");
+    ifstream file(filename);
+    string instruct;
+    while (getline(file, instruct) && address <=255)) {
+            if(instruct.size()<2){
+                continue ;
+            }
+            mem.set_value(address++, instruct.substr(0,2));
+            if(address > 255){
+                break ;
+            }
+            mem.set_value(address++, instruct.substr(2));
+    }
+
+   if(address <= 254 && mem.get_value(address - 1) != "C0" && mem.get_value(address) != "00"){
+        mem.set_value(address++, "C0");
+        mem.set_value(address++, "00");
     }
 
     file.close();
 }
 
-void Machine::loadInstructions(const string& Instructions,int address = 10) {
+void Machine::loadInstructions(const string& Instructions,int address = 16) {
+
+    if(address != 16){
+        cpu.set_pc(address);
+    }
+
     stringstream ss(Instructions);
     string instruct;
 
-    while (ss >> instruct) {
-            mem.set_value(address++, instruct);
-            if(address > 255 || address < 0){
+    while ((ss >> instruct) && (address <=255)) {
+            if(instruct.size()<2){
+                continue ;
+            }
+            mem.set_value(address++, instruct.substr(0,2));
+            if(address > 255){
                 break ;
             }
+            mem.set_value(address++, instruct.substr(2));
     }
 
-    if(mem.get_value(address) != "C000" && address <= 255){
-        mem.set_value(address++, "C000");
+    if(address <= 254 && mem.get_value(address - 1) != "C0" && mem.get_value(address) != "00"){
+        mem.set_value(address++, "C0");
+        mem.set_value(address++, "00");
     }
 
 }
