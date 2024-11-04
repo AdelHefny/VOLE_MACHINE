@@ -132,3 +132,29 @@ void ALU::twosComp(int idx_r1, int idx_r2, int idx_r3, Register& reg) {
     string res = decToHex(ans);
     reg.set_value(idx_r3, res);
 }
+void ALU::bitwiseOr(int idx_r1, int idx_r2, int idx_r3, Register& reg) {
+    int a = hexToDec(reg.get_value(idx_r1)), b = hexToDec(reg.get_value(idx_r2));
+    string res = decToHex(a | b);
+    reg.set_value(idx_r3, res);
+}
+
+void ALU::bitwiseAnd(int idx_r1, int idx_r2, int idx_r3, Register& reg) {
+    int a = hexToDec(reg.get_value(idx_r1)), b = hexToDec(reg.get_value(idx_r2));
+    string res = decToHex(a & b);
+    reg.set_value(idx_r3, res);
+}
+
+void ALU::bitwiseXor(int idx_r1, int idx_r2, int idx_r3, Register& reg) {
+    int a = hexToDec(reg.get_value(idx_r1)), b = hexToDec(reg.get_value(idx_r2));
+    string res = decToHex(a ^ b);
+    reg.set_value(idx_r3, res);
+}
+void ALU::rotateRight(int idx_r1, int idx_r2, int steps, Register& reg) {
+    int value = hexToDec(reg.get_value(idx_r1)) & 0xFF;
+
+    int rotatedValue = (value >> steps) | (value << (8 - steps)) & 0xFF;
+
+    string res = decToHex(rotatedValue);
+    if (res.size() == 1) res = "0" + res;
+    reg.set_value(idx_r1, res);
+}

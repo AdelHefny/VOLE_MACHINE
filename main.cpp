@@ -11,6 +11,7 @@ int main() {
             ui.machine.loadProgramFile(ui.inputFileName());
             ui.machine.runProgram();
             ui.machine.outputState();
+            ui.machine.reset();
         }else if(choice == 1){
             ui.enterFileOrInstruction = true;
             ui.inputInstruction();

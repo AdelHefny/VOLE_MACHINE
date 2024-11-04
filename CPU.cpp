@@ -85,8 +85,18 @@ void CPU::execute(const vector<int>& decoded,Memory& mem) {
         case 6:
             alu.add(x, y, r, reg);
             break;
-        case:
-
+        case 7:
+            alu.bitwiseOr(x,y,r,reg);
+            break;
+        case 8:
+            alu.bitwiseAnd(x,y,r,reg);
+            break;
+        case 9:
+            alu.bitwiseXor(x,y,r,reg);
+            break;
+        case 10:
+            alu.rotateRight(r,x,y,reg);
+            break;
         case 11:
             cu.jump(r, address, reg, pc);
             break;
