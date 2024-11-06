@@ -73,21 +73,14 @@ void Machine::reset(){
 
 
 void Machine::outputState(){
-    cout << "==============================" << '\n';
-    cout << "          Register State      " << '\n';
-    cout << "==============================" << '\n';
-    cout << setw(15) << "Register no" << setw(15) << "Value" << '\n';
-    cout << "------------------------------" << '\n';
-    for (int i = 0; i < 16; ++i) {
-        cout << setw(15) << "Register[" << i << "]"
-             << setw(15) << cpu.reg.get_value(i) << '\n';
-    }
+   string x = "0123456789ABCDEF";
 
-    cout << "\n==============================" << '\n';
-    cout << string(25, ' ') << "Memory status" << endl;
-    cout << "=================================================================\n";
+    cout << "===============================          =================================================================\n";
+    cout << "         Register State                                            Memory State\n";
+    cout << "===============================          =================================================================\n";
 
-    string x = "0123456789ABCDEF";
+
+    cout << setw(16) << "Register no" << setw(15) << "Value" << "          ";
     for (char c : x) {
         cout << setw(4) << c;
     }
@@ -95,11 +88,19 @@ void Machine::outputState(){
 
 
     for (int i = 0; i < 16; ++i) {
-        cout << x[i];
+
+        cout << setw(15) << x[i] << setw(15) << cpu.reg.get_value(i);
+
+        cout << "          ";
+
+        cout << setw(2) << x[i];
+
         for (int j = 0; j < 16; ++j) {
-            cout << setw(4) << mem.get_value(i * 16 + j) ;;
+            cout << setw(4) << mem.get_value(i * 16 + j);
+            )
         }
         cout << '\n';
     }
-    cout << "=================================================================\n";
+
+    cout << "==============================           =================================================================\n";
 }
