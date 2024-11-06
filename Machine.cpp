@@ -3,10 +3,10 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-
+#include <string>
 Machine::Machine(){}
 
-void Machine::loadProgramFile(const string& filename,int address) {
+void Machine::loadProgramFile(const string& filename,int address = 16) {
 
     if(address != 16){
         cpu.set_pc(address);
@@ -14,7 +14,7 @@ void Machine::loadProgramFile(const string& filename,int address) {
 
     ifstream file(filename);
     string instruct;
-    while (getline(file, instruct) && address <=255) {
+    while (getline(file, instruct) && address <=255)) {
             if(instruct.size()<2){
                 continue ;
             }
@@ -84,13 +84,22 @@ void Machine::outputState(){
     }
 
     cout << "\n==============================" << '\n';
-    cout << "          Memory State        " << '\n';
-    cout << "==============================" << '\n';
-    cout << setw(15) << "Cell no" << setw(15) << "Value" << '\n';
-    cout << "------------------------------" << '\n';
-    for (int i = 0; i < 256; ++i) {
-        cout << setw(15) << "Cell[" << i << "]"
-             << setw(15) << mem.get_value(i) << '\n';
+    cout << string(25, ' ') << "Memory status" << endl;
+    cout << "=================================================================\n";
+
+    string x = "0123456789ABCDEF";
+    for (char c : x) {
+        cout << setw(4) << c;
     }
-    cout << "==============================" << '\n';
+    cout << '\n';
+
+
+    for (int i = 0; i < 16; ++i) {
+        cout << x[i];
+        for (int j = 0; j < 16; ++j) {
+            cout << setw(4) << mem.get_value(i * 16 + j) ;;
+        }
+        cout << '\n';
+    }
+    cout << "=================================================================\n";
 }
